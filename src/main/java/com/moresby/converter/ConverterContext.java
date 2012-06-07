@@ -30,21 +30,52 @@
  */
 package com.moresby.converter;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
- * Interface the implementations of which convertes an object to an other.
- *
- * @param <F> The type of the object which will be converted.
- * @param <T> The type of the object which will be converted to.
+ * TODO javadoc.
  *
  * @author Barnabas Sudy (barnabas.sudy@gmail.com)
  * @since 2012
  */
-public interface Converter<F, T> {
+public class ConverterContext {
 
-    /**
-     * @param from The object which will be converter.
-     * @return The result.
-     * @throws ConverterException If error occurs during the conversion.
-     */
-    T convert(F from) throws ConverterException;
+    /** The default priority of the converters. */
+    private static final int DEFAULT_PRIORITY = 0;
+
+    public enum Routing {
+        AUTO,
+        BRUTE_FORCE,
+        NONE
+    }
+
+    public enum Search {
+        DEPTH_FIRST,
+        BREADTH_FIRST
+    }
+
+    private final Map<Class<?>, Map<Class<?>, List<Converter<?, ?>>>> converters = new HashMap<Class<?>, Map<Class<?>, List<Converter<?, ?>>>>();
+
+    public <F, T> void registerConverter(final Converter<F, T> converter) {
+        registerConverter(converter, DEFAULT_PRIORITY);
+    }
+
+    public <F, T> void registerConverter(final Converter<F, T> converter, final int prirority) {
+        final Type[] genericInterfaces = converter.getClass().getGenericInterfaces();
+        for (final Type genericInterface : genericInterfaces) {
+            System.out.println("GenericInterface: " + genericInterface);
+
+            for (final Type argument : ((ParameterizedType)genericInterface).getActualTypeArguments()) {
+                System.out.println("argument: " + argument);
+            }
+        }
+    }
+
+    public <F, T> T convert(final F from) {
+        return null;
+    }
 }

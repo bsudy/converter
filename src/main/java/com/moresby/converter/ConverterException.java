@@ -31,20 +31,36 @@
 package com.moresby.converter;
 
 /**
- * Interface the implementations of which convertes an object to an other.
- *
- * @param <F> The type of the object which will be converted.
- * @param <T> The type of the object which will be converted to.
+ * TODO javadoc.
  *
  * @author Barnabas Sudy (barnabas.sudy@gmail.com)
  * @since 2012
  */
-public interface Converter<F, T> {
+public class ConverterException extends RuntimeException {
 
-    /**
-     * @param from The object which will be converter.
-     * @return The result.
-     * @throws ConverterException If error occurs during the conversion.
-     */
-    T convert(F from) throws ConverterException;
+    /** @see java.io.Serializable */
+    private static final long serialVersionUID = 1L;
+
+    /** @see java.lang.Exception#Exception() */
+    public ConverterException() {
+        super();
+    }
+
+    /** @see java.lang.Exception#Exception(String, Throwable) */
+    public ConverterException(final String message, final Throwable cause) {
+        super(message, cause);
+    }
+
+    /** @see java.lang.Exception#Exception(String) */
+    public ConverterException(final String message) {
+        super(message);
+    }
+
+    /** @see java.lang.Exception#Exception(Throwable) */
+    public ConverterException(final Throwable cause) {
+        super(cause);
+    }
+
+
+
 }

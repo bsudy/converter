@@ -30,21 +30,30 @@
  */
 package com.moresby.converter;
 
+import org.junit.Before;
+import org.junit.Test;
+
 /**
- * Interface the implementations of which convertes an object to an other.
- *
- * @param <F> The type of the object which will be converted.
- * @param <T> The type of the object which will be converted to.
+ * TODO javadoc.
  *
  * @author Barnabas Sudy (barnabas.sudy@gmail.com)
  * @since 2012
  */
-public interface Converter<F, T> {
+public class ConverterContextTest {
 
     /**
-     * @param from The object which will be converter.
-     * @return The result.
-     * @throws ConverterException If error occurs during the conversion.
+     * @throws java.lang.Exception
      */
-    T convert(F from) throws ConverterException;
+    @Before
+    public void setUp() throws Exception {
+    }
+
+    /**
+     * Test method for {@link com.moresby.converter.ConverterContext#registerConverter(com.moresby.converter.Converter)}.
+     */
+    @Test
+    public void testRegisterConverterConverterOfFT() {
+        new ConverterContext().registerConverter(Converters.TRIM);
+    }
+
 }
